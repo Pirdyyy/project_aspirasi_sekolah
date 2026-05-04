@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" style="scroll-behavior: smooth">
 
 <head>
     <meta charset="UTF-8">
@@ -111,6 +111,37 @@
             background: #f59e0b;
             border-radius: 10px;
         }
+
+        /* Tombol Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #d97706, #f59e0b);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(245, 158, 11, 0.4);
+        }
     </style>
 </head>
 
@@ -159,6 +190,9 @@
                     <a href="#fitur" class="text-gray-600 hover:text-[#d97706] transition hidden md:block">Fitur</a>
                     <a href="#tentang" class="text-gray-600 hover:text-[#d97706] transition hidden md:block">Tentang</a>
                     <a href="#kontak" class="text-gray-600 hover:text-[#d97706] transition hidden md:block">Kontak</a>
+                    <a href="/laporan-publik" class="text-gray-600 hover:text-[#d97706] transition hidden md:block">
+                        Lihat Laporan
+                    </a>
                     <button onclick="openRole()"
                         class="bg-gradient-to-r from-[#d97706] to-[#f59e0b] text-white px-5 py-2 rounded-xl font-semibold btn-primary shadow-md">
                         <i class="fas fa-sign-in-alt mr-2"></i>Masuk
@@ -171,7 +205,7 @@
     <!-- ==================== HERO SECTION ==================== -->
     <section class="relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-br from-amber-50 via-white to-yellow-50 opacity-50"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 pt-1 relative">
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div data-aos="fade-right" data-aos-duration="800">
                     <div
@@ -185,13 +219,12 @@
                     </h1>
                     <p class="text-gray-600 text-lg mt-4 leading-relaxed">
                         Laporkan kerusakan fasilitas sekolah dengan mudah, cepat, dan terintegrasi.
-                        Setiap laporan akan kami tindak lanjuti maksimal 2x24 jam.
                     </p>
                     <div class="flex flex-wrap gap-4 mt-8">
-                        <button onclick="openRole()"
-                            class="bg-gradient-to-r from-[#d97706] to-[#f59e0b] text-white px-8 py-3 rounded-xl font-bold btn-primary shadow-lg">
-                            <i class="fas fa-pen-ruler mr-2"></i>Laporkan Sekarang
-                        </button>
+                        <a href="/laporan-publik"
+                            class="border-2 bg-gradient-to-r from-[#d97706] to-[#f59e0b] text-white  px-8 py-3 rounded-xl font-semibold hover:text-white transition">
+                            <i class="fas fa-eye mr-2"></i>Lihat Semua Laporan
+                        </a>
                         <a href="#fitur"
                             class="border-2 border-[#f59e0b] text-[#d97706] px-8 py-3 rounded-xl font-semibold hover:bg-[#f59e0b] hover:text-white transition">
                             <i class="fas fa-play mr-2"></i>Lihat Fitur
@@ -214,26 +247,13 @@
                 </div>
                 <div class="relative" data-aos="fade-left" data-aos-duration="800">
                     <div class="float-animation">
-                        <div
-                            class="bg-gradient-to-br from-amber-400 to-amber-600 rounded-2xl shadow-2xl p-8 text-center">
-                            <i class="fas fa-clipboard-list text-white text-8xl"></i>
-                            <p class="text-white mt-4 font-semibold">Sistem Pengaduan Online</p>
-                        </div>
-                    </div>
-                    <div class="absolute -bottom-5 -left-5 bg-white rounded-xl shadow-lg p-3 flex items-center gap-3">
-                        <div class="bg-amber-100 p-2 rounded-full"><i class="fas fa-check-circle text-amber-500"></i>
-                        </div>
-                        <div>
-                            <div class="font-bold">Respon Cepat</div>
-                            <div class="text-xs text-gray-500">Rata-rata 1 jam</div>
-                        </div>
-                    </div>
-                    <div class="absolute -top-5 -right-5 bg-white rounded-xl shadow-lg p-3 flex items-center gap-3">
-                        <div class="bg-amber-100 p-2 rounded-full"><i class="fas fa-chart-line text-amber-500"></i>
-                        </div>
-                        <div>
-                            <div class="font-bold">100% Transparan</div>
-                            <div class="text-xs text-gray-500">Status realtime</div>
+                        <!-- FOTO SEKOLAH - DENGAN BORDER RADIUS BESAR -->
+                        <div class="relative rounded-3xl overflow-hidden shadow-2xl">
+                            <img src="{{ asset('images/gedung-skaju1.jpg') }}" alt="SMK Negeri 7 Batam"
+                                class="w-full h-80 object-cover">
+                            <div class="absolute inset-0 bg-black/20 flex items-end justify-center pb-4">
+                                <p class="text-white font-semibold text-lg drop-shadow-md">SMK Negeri 7 Batam</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -332,8 +352,8 @@
                     <div
                         class="bg-white/20 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl font-bold">
                         1</div>
-                    <h3 class="text-xl font-bold mb-2">Login / Register</h3>
-                    <p class="text-white/80">Masuk menggunakan NIS dan password, atau daftar jika belum punya akun.</p>
+                    <h3 class="text-xl font-bold mb-2">Login</h3>
+                    <p class="text-white/80">Masuk menggunakan NIS dan password yang telah di daftarkan oleh admin</p>
                 </div>
                 <div class="text-center" data-aos="fade-up" data-aos-delay="100">
                     <div
@@ -383,7 +403,8 @@
                     </p>
                     <div class="flex items-center gap-4 mt-6">
                         <i class="fas fa-map-marker-alt text-[#d97706]"></i>
-                        <span class="text-gray-600">Jl. Pendidikan No. 123, Batam, Kepulauan Riau</span>
+                        <span class="text-gray-600"> Komp. Koperasi Pemko, Batam centre, Belian, Kec. Batam Kota, Kota
+                            Batam, Kepulauan Riau, Indonesia</span>
                     </div>
                 </div>
             </div>
@@ -403,12 +424,12 @@
                         <div class="bg-amber-100 w-12 h-12 rounded-full flex items-center justify-center"><i
                                 class="fas fa-user-graduate text-amber-600"></i></div>
                         <div>
-                            <div class="font-bold">Ahmad Rizki</div>
-                            <div class="text-xs text-gray-500">Kelas XII RPL</div>
+                            <div class="font-bold">Pirfir</div>
+                            <div class="text-xs text-gray-500">Kelas XI RPL 2</div>
                         </div>
                     </div>
                     <p class="text-gray-600">"Cepat banget responnya! Cuma 2 jam setelah laporan AC rusak, langsung
-                        diperbaiki. Mantap!"</p>
+                        diganti dengan yang baru. Mantap!"</p>
                     <div class="flex text-yellow-400 mt-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
                             class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                 </div>
@@ -417,8 +438,8 @@
                         <div class="bg-amber-100 w-12 h-12 rounded-full flex items-center justify-center"><i
                                 class="fas fa-user-graduate text-amber-600"></i></div>
                         <div>
-                            <div class="font-bold">Siti Nurhaliza</div>
-                            <div class="text-xs text-gray-500">Kelas XI AKL</div>
+                            <div class="font-bold">dyfir</div>
+                            <div class="text-xs text-gray-500">Kelas XI RPL 1</div>
                         </div>
                     </div>
                     <p class="text-gray-600">"Aplikasi sangat membantu! Sekarang saya bisa lapor kerusakan tanpa harus
@@ -428,11 +449,12 @@
                 </div>
                 <div class="bg-white rounded-2xl p-6 shadow-lg card-hover" data-aos="fade-up" data-aos-delay="200">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="bg-amber-100 w-12 h-12 rounded-full flex items-center justify-center"><i
-                                class="fas fa-chalkboard-user text-amber-600"></i></div>
+                        <div class="bg-amber-100 w-12 h-12 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user-graduate text-amber-600"></i>
+                        </div>
                         <div>
-                            <div class="font-bold">Bpk. Darmawan</div>
-                            <div class="text-xs text-gray-500">Guru</div>
+                            <div class="font-bold">Prifyy</div>
+                            <div class="text-xs text-gray-500">Kelas XI RPL 4</div>
                         </div>
                     </div>
                     <p class="text-gray-600">"Sistem ini memudahkan monitoring sarana sekolah. Transparan dan
@@ -503,55 +525,45 @@
 
             <!-- LOGIN FORM -->
             <div id="loginForm">
-                <form action="/login-siswa" method="POST">
+                <form action="/login-siswa" method="POST" id="loginSiswaForm">
                     @csrf
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2">NIS</label>
-                        <input type="text" name="nis" placeholder="Masukkan NIS"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        <div class="relative">
+                            <input type="text" name="nis" id="nisInput" placeholder="Masukkan NIS (8 digit)"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all"
+                                maxlength="8" oninput="validateNIS(this)">
+                            <!-- Indikator warna -->
+                            <div id="nisIndicator"
+                                class="absolute right-3 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-gray-300">
+                            </div>
+                        </div>
+                        <!-- Counter karakter -->
+                        <div class="flex justify-between items-center mt-1">
+                            <p id="nisStatus" class="text-xs text-gray-400">NIS terdiri dari 8 digit angka</p>
+                            <p id="nisCounter" class="text-xs font-mono text-gray-400">0/8</p>
+                        </div>
+                        @error('nis')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-                        <input type="password" name="password" placeholder="Masukkan Password"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        <div class="relative">
+                            <input type="password" name="password" id="loginPassword"
+                                placeholder="Masukkan Password"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 pr-10">
+                            <button type="button" onclick="togglePassword('loginPassword', 'loginEyeIcon')"
+                                class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-amber-500">
+                                <i id="loginEyeIcon" class="fas fa-eye-slash"></i>
+                            </button>
+                        </div>
                     </div>
-                    <button type="submit"
-                        class="w-full bg-gradient-to-r from-[#d97706] to-[#f59e0b] text-white py-2 rounded-xl font-semibold">Login</button>
+                    <button type="submit" id="loginSubmitBtn"
+                        class="w-full bg-gradient-to-r from-[#d97706] to-[#f59e0b] text-white py-2 rounded-xl font-semibold opacity-50 cursor-not-allowed transition">
+                        Login
+                    </button>
                 </form>
-                <p class="text-center text-sm text-gray-500 mt-4">
-                    Belum punya akun?
-                    <a href="#" onclick="showRegister()" class="text-[#d97706] font-semibold">Register di
-                        sini!</a>
-                </p>
-            </div>
-
-            <!-- REGISTER FORM -->
-            <div id="registerForm" style="display:none;">
-                <form action="/register" method="POST">
-                    @csrf
-                    <div class="mb-3">
-                        <input type="text" name="nis" placeholder="NIS"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-xl">
-                    </div>
-                    <div class="mb-3">
-                        <input type="text" name="nama" placeholder="Nama Lengkap"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-xl">
-                    </div>
-                    <div class="mb-3">
-                        <input type="text" name="kelas" placeholder="Kelas (contoh: XII RPL 1)"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-xl">
-                    </div>
-                    <div class="mb-3">
-                        <input type="password" name="password" placeholder="Password"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-xl">
-                    </div>
-                    <button type="submit"
-                        class="w-full bg-gradient-to-r from-[#d97706] to-[#f59e0b] text-white py-2 rounded-xl font-semibold">Daftar</button>
-                </form>
-                <p class="text-center text-sm text-gray-500 mt-4">
-                    Sudah punya akun?
-                    <a href="#" onclick="showLogin()" class="text-[#d97706] font-semibold">Login di sini!</a>
-                </p>
             </div>
         </div>
     </div>
@@ -570,17 +582,30 @@
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2">Username</label>
                     <input type="text" name="username" placeholder="Username"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-xl">
+                        class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500">
                 </div>
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-                    <input type="password" name="password" placeholder="Password"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-xl">
+                    <div class="relative">
+                        <input type="password" name="password" id="adminPassword" placeholder="Password"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 pr-10">
+                        <button type="button" onclick="togglePassword('adminPassword', 'adminEyeIcon')"
+                            class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-amber-500">
+                            <i id="adminEyeIcon" class="fas fa-eye-slash"></i>
+                        </button>
+                    </div>
                 </div>
                 <button type="submit"
-                    class="w-full bg-gradient-to-r from-gray-700 to-gray-900 text-white py-2 rounded-xl font-semibold">Login</button>
+                    class="w-full bg-gradient-to-r from-gray-700 to-gray-900 text-white py-2 rounded-xl font-semibold hover:from-gray-800 hover:to-gray-950 transition">
+                    <i class="fas fa-sign-in-alt mr-2"></i> Login
+                </button>
             </form>
         </div>
+    </div>
+
+    <!-- Tombol Back to Top -->
+    <div class="back-to-top" id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <i class="fas fa-arrow-up text-xl"></i>
     </div>
 
     <!-- ==================== SCRIPT ==================== -->
@@ -589,6 +614,16 @@
         AOS.init({
             once: true,
             duration: 600
+        });
+
+        // Back to Top - muncul saat scroll
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
         });
 
         // Role Modal
@@ -635,6 +670,89 @@
         function showLogin() {
             document.getElementById("loginForm").style.display = "block";
             document.getElementById("registerForm").style.display = "none";
+        }
+
+        // ============ VALIDASI NIS (MAKSIMAL 8 DIGIT) ============
+        function validateNIS(input) {
+            // Hanya izinkan angka
+            input.value = input.value.replace(/[^0-9]/g, '');
+
+            const nisValue = input.value;
+            const nisLength = nisValue.length;
+            const indicator = document.getElementById('nisIndicator');
+            const counter = document.getElementById('nisCounter');
+            const statusText = document.getElementById('nisStatus');
+            const submitBtn = document.getElementById('loginSubmitBtn');
+
+            // Update counter
+            counter.innerText = nisLength + '/8';
+
+            // Update warna indikator dan status
+            if (nisLength === 8) {
+                // Hijau - sudah 8 digit
+                indicator.className =
+                    'absolute right-3 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-green-500 shadow-sm';
+                statusText.innerHTML = '<i class="fas fa-check-circle text-green-500 mr-1"></i> NIS lengkap (8 digit)';
+                statusText.className = 'text-xs text-green-600';
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                submitBtn.classList.add('opacity-100', 'cursor-pointer');
+            } else if (nisLength > 0 && nisLength < 8) {
+                // Merah - belum 8 digit
+                indicator.className =
+                    'absolute right-3 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-red-500 animate-pulse';
+                statusText.innerHTML =
+                    '<i class="fas fa-exclamation-circle text-red-500 mr-1"></i> NIS harus 8 digit (saat ini ' + nisLength +
+                    ' digit)';
+                statusText.className = 'text-xs text-red-500';
+                submitBtn.disabled = true;
+                submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                submitBtn.classList.remove('opacity-100', 'cursor-pointer');
+            } else {
+                // Abu-abu - kosong
+                indicator.className = 'absolute right-3 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-gray-300';
+                statusText.innerHTML = 'NIS terdiri dari 8 digit angka';
+                statusText.className = 'text-xs text-gray-400';
+                submitBtn.disabled = true;
+                submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                submitBtn.classList.remove('opacity-100', 'cursor-pointer');
+            }
+
+            // Tambahkan efek border
+            if (nisLength === 8) {
+                input.classList.add('border-green-500', 'ring-1', 'ring-green-200');
+                input.classList.remove('border-red-500', 'ring-red-200', 'border-gray-300');
+            } else if (nisLength > 0) {
+                input.classList.add('border-red-500', 'ring-1', 'ring-red-200');
+                input.classList.remove('border-green-500', 'ring-green-200', 'border-gray-300');
+            } else {
+                input.classList.remove('border-red-500', 'border-green-500', 'ring-1', 'ring-red-200', 'ring-green-200');
+                input.classList.add('border-gray-300');
+            }
+        }
+
+        // Panggil validasi saat halaman dimuat (untuk input yang sudah terisi)
+        document.addEventListener('DOMContentLoaded', function() {
+            const nisInput = document.getElementById('nisInput');
+            if (nisInput && nisInput.value) {
+                validateNIS(nisInput);
+            }
+        });
+
+        // ============ TOGGLE PASSWORD ============
+        function togglePassword(inputId, iconId) {
+            const passwordInput = document.getElementById(inputId);
+            const eyeIcon = document.getElementById(iconId);
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            }
         }
 
         // Close modal when clicking outside

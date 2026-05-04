@@ -9,40 +9,40 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthSiswaController extends Controller
 {
-    public function formRegister()
-    {
-        return view('siswa.register');
-    }
+    // public function formRegister()
+    // {
+    //     return view('siswa.register');
+    // }
 
-    public function register(Request $request)
-    {
-        $request->validate([
-            'nis' => 'required|unique:siswa,nis',
-            'nama' => 'required',
-            'kelas' => 'required',
-            'password' => 'required|min:3'
-        ], [
-            'nis.unique' => 'NIS sudah terdaftar!',
-            'nis.required' => 'NIS wajib diisi!',
-            'nama.required' => 'Nama wajib diisi!',
-            'kelas.required' => 'Kelas wajib diisi!', // 🔥 INI
-            'password.required' => 'Password wajib diisi!',
-            'password.min' => 'Password minimal 3 karakter!'
-        ]);
+    // public function register(Request $request)
+    // {
+    //     $request->validate([
+    //         'nis' => 'required|unique:siswa,nis',
+    //         'nama' => 'required',
+    //         'kelas' => 'required',
+    //         'password' => 'required|min:3'
+    //     ], [
+    //         'nis.unique' => 'NIS sudah terdaftar!',
+    //         'nis.required' => 'NIS wajib diisi!',
+    //         'nama.required' => 'Nama wajib diisi!',
+    //         'kelas.required' => 'Kelas wajib diisi!', // 🔥 INI
+    //         'password.required' => 'Password wajib diisi!',
+    //         'password.min' => 'Password minimal 3 karakter!'
+    //     ]);
 
-        $siswa = Siswa::create([
-            'nis' => $request->nis,
-            'nama' => $request->nama,
-            'kelas' => $request->kelas,
-            'password' => Hash::make($request->password)
+    //     $siswa = Siswa::create([
+    //         'nis' => $request->nis,
+    //         'nama' => $request->nama,
+    //         'kelas' => $request->kelas,
+    //         'password' => Hash::make($request->password)
 
-        ]);
-        // langsung login (set session)
-        session(['nis' => $siswa->nis]);
+    //     ]);
+    //     // langsung login (set session)
+    //     session(['nis' => $siswa->nis]);
 
-        // langsung ke dashboard
-        return redirect('/dashboard-siswa');
-    }
+    //     // langsung ke dashboard
+    //     return redirect('/dashboard-siswa');
+    // }
 
     public function formlogin()
     {
@@ -53,21 +53,29 @@ class AuthSiswaController extends Controller
     {
         $siswa = Siswa::where('nis', $request->nis)->first();
 
-        // ❌ NIS tidak ditemukan
         if (!$siswa) {
             return redirect('/')->with('error', 'NIS tidak ditemukan!');
         }
 
-        // ❌ Password salah
         if (!Hash::check($request->password, $siswa->password)) {
             return redirect('/')->with('error', 'Password salah!');
         }
 
-        // ✅ Login berhasil
+        // Update last login
+        $siswa->update([
+            'last_login' => now()
+        ]);
+
+        // Hapus session admin jika ada (biar tidak konflik)
+        if (session('admin')) {
+            session()->forget('admin');
+        }
+
         session(['nis' => $siswa->nis]);
+
+        // Redirect ke dashboard siswa
         return redirect('/dashboard-siswa');
     }
-
     public function logout()
     {
         session()->forget('nis');

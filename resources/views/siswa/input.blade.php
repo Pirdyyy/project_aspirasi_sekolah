@@ -89,7 +89,6 @@
                     <input type="text" name="lokasi" required placeholder="Contoh: Ruang 203, Lab Komputer, Kantin" 
                            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#f59e0b]">
                     <div class="flex flex-wrap gap-2 mt-3">
-                        <span class="text-xs bg-amber-100 text-amber-700 px-3 py-1.5 rounded-full cursor-pointer" onclick="setLokasi('Ruang Kelas 101')">🏫 Ruang 101</span>
                         <span class="text-xs bg-amber-100 text-amber-700 px-3 py-1.5 rounded-full cursor-pointer" onclick="setLokasi('Lab. Komputer')">💻 Lab Komputer</span>
                         <span class="text-xs bg-amber-100 text-amber-700 px-3 py-1.5 rounded-full cursor-pointer" onclick="setLokasi('Toilet Utama')">🚽 Toilet</span>
                         <span class="text-xs bg-amber-100 text-amber-700 px-3 py-1.5 rounded-full cursor-pointer" onclick="setLokasi('Kantin')">🍽️ Kantin</span>

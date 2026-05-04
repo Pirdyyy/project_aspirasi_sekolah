@@ -17,15 +17,13 @@ class AspirasiController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi termasuk file foto
         $request->validate([
             'id_kategori' => 'required',
             'lokasi' => 'required',
             'ket' => 'required',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048' // max 2MB
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
-        // Proses upload foto
         $fotoPath = null;
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
@@ -39,7 +37,8 @@ class AspirasiController extends Controller
             'id_kategori' => $request->id_kategori,
             'lokasi' => $request->lokasi,
             'ket' => $request->ket,
-            'foto' => $fotoPath
+            'foto' => $fotoPath,
+            'created_at' => now()  // <-- TAMBAHKAN INI (opsional, karena timestamps true otomatis)
         ]);
 
         return redirect('/dashboard-siswa')->with('success', 'Pengaduan berhasil dikirim!');
